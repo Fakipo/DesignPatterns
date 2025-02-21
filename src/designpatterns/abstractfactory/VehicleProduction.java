@@ -4,7 +4,7 @@ public class VehicleProduction implements VehicleProducer{
 
     @Override
     public Vehicle produceVehicle(int vehicleCategory, int vehicleType) {
-        Vehicle vehicle = null;
+        Vehicle vehicle;
         VehicleFactory vehicleFactory;
         if(vehicleCategory == 1){
             vehicleFactory = new RegularVehicleClass();
