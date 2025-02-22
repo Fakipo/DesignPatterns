@@ -13,3 +13,7 @@ Design Patterns are of 3 types
 2) Structural Design Patterns
 3) Behavioral Design Patterns
 
+
+
+
+Factory pattern is about 
