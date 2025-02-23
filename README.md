@@ -11,9 +11,12 @@ Design Patterns are of 3 types
    flexibility to include changes and addition of more classes in the code
 
 2) Structural Design Patterns
-3) Behavioral Design Patterns
+
+3) Behavioral Design Patterns - These are used to define the behavior of the created objects 
+   for example, defining behavior of movement class as run, walk and fly. 
 
 
 
 
-Factory pattern is about 
+Factory pattern is a creational design pattern which is about creating a group with samme
+interface
