@@ -10,7 +10,10 @@ public class Singleton {
     }
 
     public void showMessage() {
+        System.out.println(Math.max(1,2));
+
         System.out.println("Hello from Singleton!");
     }
+
 
 }
