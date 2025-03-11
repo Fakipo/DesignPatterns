@@ -1,4 +1,4 @@
-package designpatterns.Decorator;
+package designpatterns.decorator;
 
 public class Application    {
     public static void main(String[] args) {
