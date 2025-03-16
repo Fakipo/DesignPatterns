@@ -8,6 +8,6 @@ public class Application    {
         coffee = new SugarDecorator(coffee);
         System.out.println("Sugar added to coffee = " +  coffee.getCoffeePrice());
         coffee = new MilkDecorator(coffee);
-        System.out.println("Milk and Sugar added to coffee = " +  coffee.getCoffeePrice());
+        System.out.println("Milk and Sugar added to coffee = `x`" +  coffee.getCoffeePrice());
     }
 }
