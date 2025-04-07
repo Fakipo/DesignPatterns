@@ -1,4 +1,4 @@
-package designpatterns.LLD.parkinglot;
+package lld.parkinglot;
 
 import java.util.ArrayList;
 import java.util.List;
