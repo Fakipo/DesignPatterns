@@ -11,7 +11,7 @@ public class Application {
         c1.start();
         // we cannot run c1.start with petrol engine without changing the code of class CarTC
 
-
+        // i.e we cannot change the engine without changing the code in carTC
         // But we can do that below in loosely coupled code
         CarLC c2 = new CarLC(electricEngine);
         c2.start();
