@@ -53,7 +53,8 @@ public class Application {
                 continue;
             }
             LockerAndLockerAvailability availability = lockerRoom.findLockerAvailability(pkg);
-            if (availability.getLockerAvailability()) {
+            if (availability.getLockerAvailability() == LOCKER_IS_NOT_OCCUPIED) {
+                System.out.println("Available locker = " + availability.getLocker());
                 lockerRoom.assignLocker(pkg, availability.getLocker());
                 System.out.println("Stored successfully in locker room: " + lockerRoom);
             } else {
@@ -270,7 +271,7 @@ class LockerRoom{
     public LockerAndLockerAvailability findLockerAvailability(Package packageToDeliver){
         for(Locker locker : lockerList){
             if(locker.getSize().getClass().getName().equals(packageToDeliver.getPackageSize().getClass().getName())
-                && !locker.isOccupied() == LOCKER_IS_NOT_OCCUPIED
+                && locker.isOccupied() == LOCKER_IS_NOT_OCCUPIED
             ){
                 System.out.println("Locker is Available");
                 return new LockerAndLockerAvailability(LOCKER_IS_NOT_OCCUPIED, locker);
@@ -351,13 +352,15 @@ class CityA implements City{
     }
 
     public LockerRoom findLockerRoom(Package userPackage){
+        LockerRoom lockerRoom = LOCKER_ROOM_NOT_FOUND;
         try{
-            return lockerRoomSearchMap.get(userPackage.getPackageSize().getClass().getName()).peek();
+            lockerRoom = lockerRoomSearchMap.get(userPackage.getPackageSize().getClass().getName()).peek();
+            System.out.println("LockerRoom we found is " + lockerRoom.toString());
+            return lockerRoom;
         }catch (NullPointerException exception){
             System.out.println("There is no empty LockerRoom available");
-        }finally {
-            return LOCKER_ROOM_NOT_FOUND;
         }
+        return lockerRoom;
     }
 }
 
