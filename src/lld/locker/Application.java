@@ -48,18 +48,11 @@ public class Application {
             System.out.println("\nStoring Package ID: " + pkg.getPackageId() + " of size: " + pkg.getPackageSize().getSizeName());
             LockerRoom lockerRoom = cityA.findLockerRoom(pkg);
             System.out.println("the lockerRoom we found = " + lockerRoom);
-            if (lockerRoom == null) {
-                System.out.println("No locker room available for this package size.");
-                continue;
-            }
             LockerAndLockerAvailability availability = lockerRoom.findLockerAvailability(pkg);
-            if (availability.getLockerAvailability() == LOCKER_IS_NOT_OCCUPIED) {
-                System.out.println("Available locker = " + availability.getLocker());
-                lockerRoom.assignLocker(pkg, availability.getLocker());
-                System.out.println("Stored successfully in locker room: " + lockerRoom);
-            } else {
-                System.out.println("No locker available for the package in the chosen locker room.");
-            }
+            System.out.println("Available locker = " + availability.getLocker());
+            lockerRoom.assignLocker(pkg, availability.getLocker());
+            System.out.println("Stored successfully in locker room: " + lockerRoom);
+            lockerRoom.removeFromLocker(pkg,availability.getLocker());
         }
 
         System.out.println("\nFinal locker room states:");
@@ -296,9 +289,11 @@ class LockerRoom{
     public Boolean removeFromLocker(Package packageToRemove, Locker locker){
         locker.setOccupied(LOCKER_IS_NOT_OCCUPIED);
         locker.setPackageInLocker(null);
+        this.getCity().getLockerRoomSearchMap().get(packageToRemove.getPackageSize().getClass().getName()).remove(this);
         int totalNoLockers = this.sizeAndCapacityMap.get(locker.getSize().getClass().getName()).getNoOfOccupiedLockers();
         this.sizeAndCapacityMap.get(locker.getSize().getClass().getName()).setNoOfOccupiedLockers(totalNoLockers + 1);
         city.getLockerRoomSearchMap().get(locker.getSize().getClass().getName()).offer(this);
+        System.out.println("Successfully removed from the locker");
         return SUCCESSFULLY_REMOVED_FROM_LOCKER;
     }
 }
@@ -358,9 +353,8 @@ class CityA implements City{
             System.out.println("LockerRoom we found is " + lockerRoom.toString());
             return lockerRoom;
         }catch (NullPointerException exception){
-            System.out.println("There is no empty LockerRoom available");
+            throw new RuntimeException("Locker not found");
         }
-        return lockerRoom;
     }
 }
 
